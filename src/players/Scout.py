@@ -5,7 +5,7 @@ from players.Player import Player
 
 class Scout(Player):
     def __init__(self, team: bool):
-        super().__init__("Scout", 300, 100, team)
+        super().__init__("Scout", 150, 100, team)
 
     # Specificity of the class:
     # The received attacks have a chance to be dodged

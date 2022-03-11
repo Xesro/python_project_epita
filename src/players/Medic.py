@@ -4,7 +4,7 @@ from players.Player import Player
 
 class Medic(Player):
     def __init__(self, team: bool):
-        super().__init__("Medic", 400, 100, team)
+        super().__init__("Medic", 180, 100, team)
 
     # Available action for the Medic class: 
     # Heal: give back 10 health

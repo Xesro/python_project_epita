@@ -5,7 +5,7 @@ from players.Player import Player
 
 class Soldier(Player):
     def __init__(self, team: bool):
-        super().__init__("Soldier", 400, 300, team)
+        super().__init__("Soldier", 200, 300, team)
 
     # Available action for the Soldier class:
     # ROCKET: probability to kill instantly the target but you can hurt yourself
