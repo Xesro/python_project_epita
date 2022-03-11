@@ -9,8 +9,11 @@ class Scout(Player):
 
     # BONK
     def attack(self, enemy: 'Player'):
-        return super()._attack(enemy) * 2 * ceil(random())
-
-    def receive_attack(self, enemy: 'Player'):
+        total = super()._attack(enemy)
         if (ceil(random()) == 1):
-            super().receive_attack(enemy)
+            total += super()._attack(enemy)
+        return total
+
+    def _receive_attack(self, enemy: 'Player'):
+        if (ceil(random()) == 1):
+            super()._receive_attack(enemy)

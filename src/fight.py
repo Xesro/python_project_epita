@@ -18,14 +18,10 @@ while(True):
     redTeamCanPlay = not redTeamCanPlay
 
     playingTeam = red_team if redTeamCanPlay else blue_team
-    otherTeam = blue_team if not redTeamCanPlay else red_team
+    otherTeam = red_team if not redTeamCanPlay else blue_team
     playerIndex = ceil(
         random() * (len(playingTeam)-1))
     player = playingTeam[playerIndex]
-
-    # PRINT current player
-    print("C'est au tour de " + player.name + " de la team " +
-          ("RED" if player.team else "BLUE") + " de jouer.")
 
     # Update status
     player.updateStatus()
@@ -38,28 +34,28 @@ while(True):
               "RED" if player.team else "BLUE" + " est mort.")
     else:
         while 1:
+            for a in playingTeam + otherTeam:
+                print(a)
+                # PRINT current player
+            print("\nC'est au tour de " + player.name + " de la team " +
+                  ("RED" if player.team else "BLUE") + " de jouer.")
             action = input("Quelle action voulez vous faire ?\n")
-            print("Voici vos alliés")
-            for a in playingTeam:
-                print(a.name + " a encore " +
-                      str(a.health) + " points de vie")
-            print("Voici vos ennemis")
-            for a in otherTeam:
-                print(a.name + " a encore " +
-                      str(a.health) + " points de vie")
-
             if hasattr(player, action):  # Si l'action existe dans la classe
                 # get target
                 while 1:
                     target = input("Qui souhaitez vous attaquer ?\n")
-                    if(target in otherTeam):
-                        break
-                    else:
+                    otherIndex = -1
+                    for i in range(len(otherTeam)):
+                        if otherTeam[i].name == target:
+                            otherIndex = i
+                            break
+                    if otherIndex == -1:
                         print("Le joueur n'existe pas dans l'equipe adverse")
-                result = getattr(playingTeam[target], action)(player)
-                if otherTeam[target].isDead():
-                    otherTeam.pop(target)
-                    print(target + " est mort")
+                    else:
+                        break
+                getattr(player, action)(otherTeam[otherIndex])
+                if otherTeam[otherIndex].isDead():
+                    otherTeam.pop(otherIndex)
                 break
 
             else:

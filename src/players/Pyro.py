@@ -9,9 +9,9 @@ class Pyro(Player):
 
     # FIRE: burn the enemy
     def attack(self, enemy: 'Player'):
-        super()._attack(enemy)
+        super().attack(enemy)
         enemy._be_burned()
 
     # The Pyro can't be burned
-    def be_burned(self):
+    def _be_burned(self):
         pass

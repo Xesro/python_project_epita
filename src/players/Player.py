@@ -1,6 +1,9 @@
 from math import ceil
 from random import random
 
+RED = True
+BLUE = False
+
 
 class Player:
     def __init__(self, name: str, health: int, force: int, team: bool):
@@ -14,27 +17,31 @@ class Player:
     def _farm_xp(self):
         self.force += ceil(random() * 10)
 
-    def _attack(self, enemy: 'Player'):
+    def attack(self, enemy: 'Player'):
+        enemy._receive_attack(self)
+
+    def _receive_attack(self, enemy: 'Player'):
         if (enemy.team != self.team):
-            enemy.health -= max(0, self.force - enemy.armor)
             rand = int(random() * 100)
 
-            if (rand <= 25 or enemy.armor == 1):
-                enemy.armor = 0
-            else:
-                enemy.armor -= 1
-            self._farm_xp()
+            damage = self.armor - enemy.force
+
+            self.armor = max(damage, 0)
+            if (damage < 0):
+                self.health += damage
+            print(f'{self.name} has received {enemy.force} damage.')
+            enemy._farm_xp()
             return rand
         return 0
 
-    def receive_attack(self, enemy: 'Player'):
-        enemy._attack(self)
-        return self.isDead()
-
     def isDead(self):
         if self.health <= 0:
+            print(
+                f'{self.name}, of the team {"RED" if self.team == RED else "BLUE"} is dead.')
             return True
         else:
+            print(
+                f'{self.name}, of the team {"RED" if self.team == RED else "BLUE"} is still alive.')
             return False
 
     def updateStatus(self):
@@ -50,4 +57,4 @@ class Player:
         self.burned = max(self.burned, 5)
 
     def __str__(self):
-        return f'{self.name} has {self.health} health, {self.force} force, and {self.armor} armor.'
+        return f'{self.name} of the {"RED" if self.team == RED else "BLUE"} has {self.health} health, {self.force} force, and {self.armor} armor.'

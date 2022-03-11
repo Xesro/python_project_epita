@@ -8,9 +8,11 @@ class Spy(Player):
         super().__init__("Spy", 200, 200, team)
 
     # Can be attacked by enemies from his own team
-    def receive_attack(self, enemy: 'Player'):
+    def _receive_attack(self, enemy: 'Player'):
         self.team = not self.team
-        super().receive_attack(enemy)
+        super()._receive_attack(enemy)
+        self.team = not self.team
+        super()._receive_attack(enemy)
 
     # Can switch team
     def change_team(self):

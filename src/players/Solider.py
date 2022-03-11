@@ -19,4 +19,4 @@ class Soldier(Player):
             enemy.health = 0
             return dammage
         else:
-            return super()._attack(enemy) * 2 * ceil(random())
+            return super().attack(enemy)
