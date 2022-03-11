@@ -4,7 +4,7 @@ from random import random
 from players.Medic import Medic
 from players.Pyro import Pyro
 from players.Scout import Scout
-from players.Solider import Soldier
+from players.Soldier import Soldier
 from players.Spy import Spy
 
 redTeamCanPlay = True
@@ -39,9 +39,9 @@ while(True):
                 # PRINT current player
             print("\nC'est au tour de " + player.name + " de la team " +
                   ("RED" if player.team else "BLUE") + " de jouer.")
-            action = input("Quelle action voulez vous faire ?\n")
+            action = input("Quelle action voulez vous faire ? " + "(Entrez: \'attack\' ou une capacité de la classe)" + "\n")
             if hasattr(player, action):  # Si l'action existe dans la classe
-                # get target
+                # Get target
                 while 1:
                     target = input("Qui souhaitez vous attaquer ?\n")
                     otherIndex = -1

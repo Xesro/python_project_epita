@@ -5,10 +5,11 @@ from players.Player import Player
 
 class Soldier(Player):
     def __init__(self, team: bool):
-        super().__init__("Solider", 400, 300, team)
+        super().__init__("Soldier", 400, 300, team)
 
-    # HUGE ROCKET: probability to kill instantly the target but you can hurt yourself
-    def attack(self, enemy: 'Player'):
+    # Available action for the Soldier class:
+    # ROCKET: probability to kill instantly the target but you can hurt yourself
+    def rocket(self, enemy: 'Player'):
         # Self dammage
         if (ceil(random() * 100) <= 33):
             self.health -= random() * 10
