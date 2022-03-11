@@ -9,40 +9,46 @@ from players.Spy import Spy
 
 redTeamCanPlay = True
 
-if(__name__ == 'main'):
-    red_team = [Medic(True), Pyro(True), Scout(True), Soldier(True), Spy(True)]
-    blue_team = [Medic(False), Pyro(False), Scout(
-        False), Soldier(False), Spy(False)]
 
-    while(True):
-        redTeamCanPlay = not redTeamCanPlay
+red_team = [Medic(True), Pyro(True), Scout(True), Soldier(True), Spy(True)]
+blue_team = [Medic(False), Pyro(False), Scout(
+    False), Soldier(False), Spy(False)]
 
-        playingTeam = red_team if redTeamCanPlay else blue_team
-        otherTeam = blue_team if not redTeamCanPlay else red_team
-        playerIndex = ceil(
-            random() * ceil(playingTeam))
-        player = playingTeam[playerIndex]
+while(True):
+    redTeamCanPlay = not redTeamCanPlay
 
-        # PRINT current player
-        print("C'est au tour de " + player.name + " de la team " +
-              "RED" if player.team else "BLUE" + " de jouer.")
+    playingTeam = red_team if redTeamCanPlay else blue_team
+    otherTeam = blue_team if not redTeamCanPlay else red_team
+    playerIndex = ceil(
+        random() * (len(playingTeam)-1))
+    player = playingTeam[playerIndex]
 
-        # Update status
-        player.updateStatus()
-        if player.isDead():
-            red_team.pop(
-                playerIndex) if redTeamCanPlay else blue_team.pop(playerIndex)
-            print(player.name + "de la team " +
-                  "RED" if player.team else "BLUE" + " est mort.")
-            continue
+    # PRINT current player
+    print("C'est au tour de " + player.name + " de la team " +
+          ("RED" if player.team else "BLUE") + " de jouer.")
 
-        # Get action to perform
+    # Update status
+    player.updateStatus()
+
+    # If is dead
+    if player.isDead():
+        red_team.pop(
+            playerIndex) if redTeamCanPlay else blue_team.pop(playerIndex)
+        print(player.name + "de la team " +
+              "RED" if player.team else "BLUE" + " est mort.")
+    else:
         while 1:
             action = input("Quelle action voulez vous faire ?\n")
-            if (action == "stats"):
-                for a in playingTeam:
-                    print(a.name + " a encore " + a.health + " points de vie")
-            elif hasattr(player, action):
+            print("Voici vos alliés")
+            for a in playingTeam:
+                print(a.name + " a encore " +
+                      str(a.health) + " points de vie")
+            print("Voici vos ennemis")
+            for a in otherTeam:
+                print(a.name + " a encore " +
+                      str(a.health) + " points de vie")
+
+            if hasattr(player, action):  # Si l'action existe dans la classe
                 # get target
                 while 1:
                     target = input("Qui souhaitez vous attaquer ?\n")

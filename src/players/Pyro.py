@@ -5,7 +5,7 @@ from players.Player import Player
 
 class Pyro(Player):
     def __init__(self, team: str):
-        super().__init__("Pyro", "300", "300", team)
+        super().__init__("Pyro", 300, 300, team)
 
     # FIRE: burn the enemy
     def attack(self, enemy: 'Player'):

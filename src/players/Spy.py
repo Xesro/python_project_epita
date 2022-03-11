@@ -5,7 +5,7 @@ from players.Player import Player
 
 class Spy(Player):
     def __init__(self, team: bool):
-        super().__init__("Spy", "200", "200", team)
+        super().__init__("Spy", 200, 200, team)
 
     # Can be attacked by enemies from his own team
     def receive_attack(self, enemy: 'Player'):

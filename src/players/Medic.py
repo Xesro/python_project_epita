@@ -4,7 +4,7 @@ from players.Player import Player
 
 class Medic(Player):
     def __init__(self, team: bool):
-        super().__init__("Medic", "400", "100", team)
+        super().__init__("Medic", 400, 100, team)
 
     # FEED: heal the target if he is in the same team else attack him
     def attack(self, enemy: 'Player'):
